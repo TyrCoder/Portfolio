@@ -7,7 +7,8 @@ import { SectionHead } from "@/components/section-head";
 import { StatusMark } from "@/components/status-mark";
 import {
   PROJECTS_PER_SHEET,
-  disciplines,
+  disciplineLabels,
+  disciplineOrder,
   projects,
   type Discipline,
   type Project,
@@ -142,16 +143,25 @@ export function Work() {
   const [direction, setDirection] = useState(1);
   const query = useSyncExternalStore(subscribeToQuery, readQuery, serverQuery);
 
+  const chips = useMemo(() => {
+    const present = new Set(projects.map((item) => item.discipline));
+    return [
+      { code: "ALL" as Filter, label: "All sheets" },
+      ...disciplineOrder
+        .filter((code) => present.has(code))
+        .map((code) => ({ code: code as Filter, label: disciplineLabels[code] })),
+    ];
+  }, []);
+
   const { filter, requestedSheet } = useMemo(() => {
     const params = new URLSearchParams(query);
     const code = params.get("d");
     const sheet = Number(params.get("sheet"));
     return {
-      filter:
-        code && disciplines.some((entry) => entry.code === code) ? (code as Filter) : "ALL",
+      filter: code && chips.some((entry) => entry.code === code) ? (code as Filter) : "ALL",
       requestedSheet: Number.isInteger(sheet) && sheet > 0 ? sheet : 1,
     };
-  }, [query]);
+  }, [query, chips]);
 
   const filtered = useMemo(
     () => (filter === "ALL" ? projects : projects.filter((item) => item.discipline === filter)),
@@ -193,17 +203,17 @@ export function Work() {
       <SectionHead
         sheet="Drawing set · 02"
         title="Selected work"
-        note="Nine drawings, three to a sheet. Every one was built, deployed, and used by somebody other than me."
+        note={`${projects.length} projects, ${PROJECTS_PER_SHEET} to a sheet. Each one names what it does, what it runs on, and where the code lives.`}
       />
 
       <div className="mt-12 flex flex-wrap items-center gap-x-1 gap-y-3 border-y border-rule py-3">
-        {disciplines.map((entry) => {
+        {chips.map((entry) => {
           const active = filter === entry.code;
           return (
             <button
               key={entry.code}
               type="button"
-              onClick={() => pick(entry.code as Filter)}
+              onClick={() => pick(entry.code)}
               aria-pressed={active}
               className={`relative isolate px-4 py-2 text-[0.6875rem] uppercase tracking-[0.16em] mono-tight transition-colors duration-300 ${
                 active ? "text-on-redline" : "text-ink-3 hover:text-ink"
