@@ -1,0 +1,152 @@
+@import "tailwindcss";
+
+:root {
+  color-scheme: light;
+  --sheet: #e8eae6;
+  --sheet-2: #dfe2dd;
+  --ink: #14161a;
+  --ink-2: #4a5057;
+  --ink-3: #5a616a;
+  --rule: #c3c7c1;
+  --rule-strong: #a5aba4;
+  --redline: #c93a18;
+  --redline-ink: #b32f13;
+  --construction: #2e6c8c;
+  --on-redline: #f4f5f2;
+}
+
+:root[data-plot="dark"] {
+  color-scheme: dark;
+  --sheet: #101316;
+  --sheet-2: #171b1f;
+  --ink: #e4e7e3;
+  --ink-2: #b4bac0;
+  --ink-3: #9aa0a6;
+  --rule: #2a2f34;
+  --rule-strong: #3b4248;
+  --redline: #ff5b33;
+  --redline-ink: #ff5b33;
+  --construction: #6fa8c4;
+  --on-redline: #14161a;
+}
+
+@theme inline {
+  --color-sheet: var(--sheet);
+  --color-sheet-2: var(--sheet-2);
+  --color-ink: var(--ink);
+  --color-ink-2: var(--ink-2);
+  --color-ink-3: var(--ink-3);
+  --color-rule: var(--rule);
+  --color-rule-strong: var(--rule-strong);
+  --color-redline: var(--redline);
+  --color-redline-ink: var(--redline-ink);
+  --color-construction: var(--construction);
+  --color-on-redline: var(--on-redline);
+  --font-sans: var(--font-archivo), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-martian), ui-monospace, monospace;
+  --ease-plot: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@layer base {
+  * {
+    border-color: var(--rule);
+  }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+    overflow-x: clip;
+    scrollbar-color: var(--rule-strong) transparent;
+    scrollbar-width: thin;
+  }
+
+  body {
+    background-color: var(--sheet);
+    color: var(--ink);
+    font-family: var(--font-archivo), ui-sans-serif, system-ui, sans-serif;
+    font-synthesis-weight: none;
+    caret-color: var(--redline);
+    text-rendering: optimizeLegibility;
+  }
+
+  ::selection {
+    background-color: var(--redline);
+    color: var(--on-redline);
+  }
+
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background-color: var(--sheet-2);
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: var(--rule-strong);
+    border: 3px solid var(--sheet-2);
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background-color: var(--redline);
+  }
+
+  :focus-visible {
+    outline: 2px dashed var(--redline);
+    outline-offset: 3px;
+  }
+
+  a {
+    text-underline-offset: 0.25em;
+    text-decoration-thickness: 1px;
+  }
+
+  svg {
+    display: block;
+  }
+}
+
+@layer utilities {
+  .sheet-wide {
+    font-variation-settings: "wdth" 125;
+  }
+
+  .sheet-narrow {
+    font-variation-settings: "wdth" 84;
+  }
+
+  .mono-tight {
+    font-family: var(--font-martian), ui-monospace, monospace;
+    font-variation-settings: "wdth" 87.5;
+    font-feature-settings: "tnum" 1;
+  }
+
+  .tnum {
+    font-variant-numeric: tabular-nums;
+  }
+
+  .plate {
+    max-width: 96rem;
+    margin-inline: auto;
+    padding-inline: clamp(1.25rem, 4vw, 4.5rem);
+  }
+
+  .measure {
+    max-width: 68ch;
+  }
+
+  .isolate-list [data-row] {
+    transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .isolate-list:has([data-row]:hover) [data-row]:not(:hover),
+  .isolate-list:has([data-row]:focus-within) [data-row]:not(:focus-within) {
+    opacity: 0.4;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
