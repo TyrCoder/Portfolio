@@ -27,16 +27,30 @@ export function Contact() {
         >
           <a
             href={primary.href}
-            className="sheet-wide block break-words text-[clamp(1.75rem,5.2vw,3.5rem)] font-semibold uppercase leading-[0.95] tracking-[-0.035em] text-ink underline decoration-rule-strong decoration-1 underline-offset-[0.14em] transition-colors duration-300 hover:text-redline-ink hover:decoration-redline-ink"
+            className="sheet-wide block text-[clamp(1.5rem,4.2vw,3rem)] font-semibold uppercase leading-[1.05] tracking-[-0.035em] text-ink underline decoration-rule-strong decoration-1 underline-offset-[0.14em] transition-colors duration-300 hover:text-redline-ink hover:decoration-redline-ink"
           >
-            {primary.value}
+            {primary.value.includes("@")
+              ? (() => {
+                  const [local, domain] = primary.value.split("@");
+                  return (
+                    <>
+                      <span className="inline-block">{local}@</span>
+                      <span className="inline-block">{domain}</span>
+                    </>
+                  );
+                })()
+              : primary.value}
           </a>
           <p className="measure mt-8 text-base leading-relaxed text-ink-2">{identity.intro}</p>
           <div className="mt-9 flex flex-wrap gap-3">
             <Control href={primary.href} variant="redline" note="REPLY 24H">
               Send an email
             </Control>
-            <Control href={identity.resume} download newTab>
+            <Control
+              href={identity.resume}
+              download={`${identity.firstName} ${identity.lastName} CV.png`}
+              newTab
+            >
               Download CV
             </Control>
           </div>

@@ -14,7 +14,7 @@ type ControlProps = {
   variant?: Variant;
   note?: string;
   newTab?: boolean;
-  download?: boolean;
+  download?: boolean | string;
   type?: "button" | "submit";
   disabled?: boolean;
   className?: string;

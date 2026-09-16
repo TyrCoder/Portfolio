@@ -64,7 +64,7 @@ export const identity = {
     "I build web applications end to end: interfaces that hold up under real use, APIs that stay predictable, and the deployment pipeline that carries them. I am looking for an on-the-job training placement or a junior position where the code I write is read by other people.",
   intro:
     "Fourth-year IT student. I ship small, finished things rather than large unfinished ones.",
-  resume: "/resume.pdf",
+  resume: "/CV.png",
   portrait: { src: "/portrait.jpg", alt: "Timothy Kyl Balbieran" },
 } as const;
 
@@ -213,10 +213,10 @@ export const credentials: Credential[] = [
 ];
 
 export const contactChannels: ContactChannel[] = [
-  { label: "Email", value: "you@example.com", href: "mailto:you@example.com", primary: true },
+  { label: "Email", value: "tbalbieranvi@gmail.com", href: "mailto:tbalbieranvi@gmail.com", primary: true },
   { label: "GitHub", value: "github.com/TyrCoder", href: "https://github.com/TyrCoder" },
-  { label: "LinkedIn", value: "linkedin.com/in/yourhandle", href: "https://linkedin.com/in/yourhandle" },
-  { label: "Phone", value: "+63 900 000 0000", href: "tel:+639000000000" },
+  { label: "LinkedIn", value: "linkedin.com/in/timothy-kyl-balbieran-9924b9407", href: "https://linkedin.com/in/timothy-kyl-balbieran-9924b9407" },
+  { label: "Phone", value: "+63 976 224 6712", href: "tel:+639762246712" },
 ];
 
 export const site = {
