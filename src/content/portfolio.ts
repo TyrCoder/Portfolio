@@ -65,7 +65,7 @@ export const identity = {
   intro:
     "Fourth-year IT student. I ship small, finished things rather than large unfinished ones.",
   resume: "/resume.pdf",
-  portrait: { src: "/portrait.jpg", alt: "Portrait photograph" },
+  portrait: { src: "", alt: "Portrait photograph" },
 } as const;
 
 export const projects: Project[] = [

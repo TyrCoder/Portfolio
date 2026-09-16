@@ -66,7 +66,7 @@ The build does not break when these are missing; project image wells show a draw
 | File | Used for |
 |---|---|
 | `public/resume.pdf` | The "Download CV" button. Path is set by `identity.resume`. |
-| `public/portrait.jpg` | Your photograph. Path is set by `identity.portrait`. |
+| `public/portrait.jpg` | Your photograph, shown as Plate 01 beside your name on the title sheet. **Two steps:** drop the file in, then set `identity.portrait.src` to `"/portrait.jpg"`. It ships empty so the page makes no failing request while the photo is missing — until you set it, the plate shows the drafting "no image supplied" cross. Portrait crop, 4:5, around 640×800. |
 | Project images | Add `image: { src: "/work/thing.png", alt: "…" }` to a project. Anything under `public/` works. |
 | `src/app/opengraph-image.png` | The social preview card. Drop a 1200×630 PNG at that exact path and Next picks it up — nothing to wire. |
 | `src/app/icon.svg` | The browser tab icon. A drafting mark ships by default; replace it with your own if you prefer. |

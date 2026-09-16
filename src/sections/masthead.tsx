@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "motion/react";
+import { AssetFrame } from "@/components/asset-frame";
 import { Control } from "@/components/control";
 import { Dimension } from "@/components/dimension";
 import { identity } from "@/content/portfolio";
@@ -47,6 +48,29 @@ function Annotation() {
         <span className="text-ink-2">Available {identity.availableFrom}</span>
       </p>
     </motion.div>
+  );
+}
+
+function Portrait() {
+  return (
+    <motion.figure
+      className="w-[10rem] sm:w-[11rem] md:w-full md:max-w-[9.5rem]"
+      initial={{ opacity: 0, y: 12 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.8, delay: 1.2, ease: easePlot }}
+    >
+      <AssetFrame
+        src={identity.portrait.src}
+        alt={identity.portrait.alt}
+        label="Pending"
+        className="aspect-[4/5]"
+        priority
+      />
+      <figcaption className="mono-tight mt-2 flex items-baseline justify-between gap-3 border-t border-rule pt-2 text-[0.5625rem] uppercase tracking-[0.16em] text-ink-3">
+        <span>Plate 01</span>
+        <span>{identity.standing}</span>
+      </figcaption>
+    </motion.figure>
   );
 }
 
@@ -129,8 +153,8 @@ export function Masthead() {
           variants={plot}
           initial="hidden"
           animate="shown"
-          className="sheet-wide font-semibold uppercase leading-[0.84] tracking-[-0.04em] md:col-span-8"
-          style={{ fontSize: "clamp(2.25rem, 10.5vw, 6rem)" }}
+          className="sheet-wide font-semibold uppercase leading-[0.84] tracking-[-0.04em] md:col-span-7"
+          style={{ fontSize: "clamp(2.25rem, 8.5vw, 5.5rem)" }}
         >
           <motion.span variants={line} className="block">
             {identity.firstName}
@@ -139,7 +163,10 @@ export function Masthead() {
             {identity.lastName}
           </motion.span>
         </motion.h1>
-        <div className="md:col-span-4">
+        <div className="md:col-span-2">
+          <Portrait />
+        </div>
+        <div className="md:col-span-3">
           <Contents />
         </div>
       </div>
