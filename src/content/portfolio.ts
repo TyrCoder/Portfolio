@@ -88,7 +88,7 @@ export const projects: Project[] = [
     ],
     links: [
       { label: "Repository", href: "https://github.com/TyrCoder/liliw-frontend" },
-      { label: "Live", href: "https://liliw-frontend.vercel.app" },
+      { label: "Live", href: "https://visitliliw.vercel.app" },
     ],
   },
   {
